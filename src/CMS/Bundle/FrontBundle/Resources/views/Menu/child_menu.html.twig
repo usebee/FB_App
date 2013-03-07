@@ -1,0 +1,26 @@
+{% for page in pages %}
+    {% set class = '' %}
+    {% if loop.first and slug[1] is not defined%}
+        {% set class = ' class="active"' %}
+    {% endif %}
+    {% if loop.last and listArtilceOfParent is not defined %}
+        {% set class = ' class="late"' %}
+    {% endif %}
+    {% if slug[1] is defined and page.getAlias == slug[1] %}
+        {% set class = ' class="active"' %}
+    {% endif %}
+    <li{{ class | raw }}>
+        <a href="{{ url('cms_front_main', {'slug' : slug[0] ~ '/' ~ page.getAlias}) }}" title="{{ page.getName }}">{{ page.getName }}</a>
+    </li>
+{% endfor %}
+{% if listArtilceOfParent is defined %}
+    {% for article in listArtilceOfParent %}
+        {% set class = '' %}
+        {% if loop.last %}
+            {% set class = ' class="late"' %}
+        {% endif %}
+        <li{{ class | raw }}>
+            <a class="z-click" href="{{ url('cms_front_slideshow', {'slug' : article.getAlias, 'langId': lang }) }}" title="{{ article.getTitle }}">{{ article.getTitle }}</a>
+        </li>
+    {% endfor %}
+{% endif %}

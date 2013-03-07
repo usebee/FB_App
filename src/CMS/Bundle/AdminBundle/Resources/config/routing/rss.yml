@@ -1,0 +1,6 @@
+admin_rss_list:
+    pattern: /list
+    defaults: { _controller: "CMSAdminBundle:Rss:index" }
+admin_rss_add:
+    pattern: /add
+    defaults: { _controller: "CMSAdminBundle:Rss:add" }

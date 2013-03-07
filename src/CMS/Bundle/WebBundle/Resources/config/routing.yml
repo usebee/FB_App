@@ -1,0 +1,6 @@
+cms_web_homepage:
+    pattern:  /{path}
+    defaults: { _controller: CMSWebBundle:Default:index, path: null }
+cms_web_menu:
+    pattern:  /menu/{slug}
+    defaults: { _controller: CMSWebBundle:Menu:index }

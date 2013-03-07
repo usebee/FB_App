@@ -1,0 +1,46 @@
+admin_page:
+    pattern: /{page}/{lang}
+    defaults: { _controller: "CMSAdminBundle:Page:index", page : 1, lang : null}
+    requirements:
+        page: \d+
+        lang: \d+
+
+admin_page_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CMSAdminBundle:Page:show" }
+
+admin_page_new:
+    pattern:  /new
+    defaults: { _controller: "CMSAdminBundle:Page:new" }
+
+admin_page_create:
+    pattern:  /create
+    defaults: { _controller: "CMSAdminBundle:Page:create" }
+    requirements: { _method: post }
+
+admin_page_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CMSAdminBundle:Page:edit" }
+
+admin_page_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CMSAdminBundle:Page:update" }
+    requirements: { _method: post }
+
+admin_page_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CMSAdminBundle:Page:delete" }
+    requirements: { _method: post|get }
+
+admin_page_up:
+    pattern:  /up/{id}
+    defaults: { _controller: "CMSAdminBundle:Page:up" }
+
+admin_page_down:
+    pattern:  /down/{id}
+    defaults: { _controller: "CMSAdminBundle:Page:down" }
+
+admin_page_check_alias_unique:
+    pattern:  /check-alias/{alias}
+    defaults: { _controller: "CMSAdminBundle:Page:checkAlias" }
+

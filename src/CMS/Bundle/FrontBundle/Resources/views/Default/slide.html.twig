@@ -1,0 +1,14 @@
+<div class="slideshow">
+    <a class="logo" href="{{ url('cms_front') }}" title="Duke">
+        <img src="{{ asset('static/front/images/logo-02.png') }}" title="{{ 'Duke'|trans({}, "CMSFrontBundle") }}">
+    </a>
+    <div class="loading-icon fullSlideLoader">
+        <img src="{{ asset('static/front/images/loading.gif') }}" alt="{{ 'loading'|trans({}, "CMSFrontBundle") }}"/>
+    </div>
+    <a href="javascript:;" title="{{ 'close'|trans({}, "CMSFrontBundle") }}" class="ui-icon lnk-close">{{ 'close'|trans({}, "CMSFrontBundle") }}</a>
+    <a href="javascript:;" title="{{ 'previous'|trans({}, "CMSFrontBundle") }}" class="ui-icon lnk-previous">{{ 'previous'|trans({}, "CMSFrontBundle") }}</a>
+    <div class="slideshow-inner">
+    </div>
+    <a href="javascript:;" title="{{ 'next'|trans({}, "CMSFrontBundle") }}" class="ui-icon lnk-next">{{ 'next'|trans({}, "CMSFrontBundle") }}</a>
+    {% include 'CMSFrontBundle::footer.html.twig' %}
+</div>

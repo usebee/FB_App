@@ -1,0 +1,5 @@
+<ul>
+    {%for page in pages %}
+        <li><a href="{{ url('cms_front_main', {'slug': page.getAlias}) }}" title="{{ page.getName }}">{{ page.getName }}</a></li>
+    {% endfor %}
+</ul>

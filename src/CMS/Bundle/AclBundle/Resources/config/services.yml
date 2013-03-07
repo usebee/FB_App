@@ -1,0 +1,7 @@
+services:
+    cms.acl_manager:
+        class: CMS\Bundle\AclBundle\Domain\AclManager
+        arguments:
+            aclProvider: "@security.acl.provider"
+            securityContext: "@security.context"
+            objectIdentityRetrievalStrategy: "@security.acl.object_identity_retrieval_strategy"

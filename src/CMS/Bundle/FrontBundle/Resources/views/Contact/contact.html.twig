@@ -1,0 +1,16 @@
+{% if article is defined %}
+    <div class="block-address">
+        <header>
+            <h2>{{ article.getTitle | raw }}</h2>
+        </header>
+        <article>
+            {{ article.getDescription | raw }}
+        </article>
+    </div>
+    {% if article.getArticle.getMediaId[0] is defined %}
+        <div class="block-map">
+            <img src="{{ asset(mediaPath~article.getArticle.getMediaId[0].getName) }}" alt="{{ 'photo-map'|trans({}, "CMSFrontBundle") }}" title="{{ 'photo-map'|trans({}, "CMSFrontBundle") }}" height="275" width="306">
+
+        </div>
+    {% endif %}
+{% endif %}

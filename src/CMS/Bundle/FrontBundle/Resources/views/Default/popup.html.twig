@@ -1,0 +1,43 @@
+<div class="popup-type-2">
+    <section id="container-inner">
+        <div class="blockpopup blockpopup-7">
+            {% if pages is defined %}
+                {% for page in pages %}
+                {% set activeArticle = '' %}
+                {% if page.getAlias == bookmark %}
+                    {% set activeArticle = ' id="active-page"' %}
+                {% endif %}
+                {% if bookmark == '' %}
+                    {% set activeArticle = ' id="active-page"' %}
+                {% endif %}
+                <article{{ activeArticle | raw }}>
+                    <header>
+                        <h1>{{ page.getTitle | raw }}</h1>
+                        <h3>{{ page.getDescription | raw }}</h3>
+                    </header>
+
+                    <div class="content-popup">
+                        {{ page.getContent | raw }}
+                    </div>
+                </article>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="close-popup">
+            <a href="#" title="close popup">
+                <img class="ui-icon init-icon-10" src="{{ asset('static/front/images/transparent.png') }}" alt="{{ 'close'|trans({}, "CMSFrontBundle") }}" />
+            </a>
+        </div>
+        <div class="CMS-scroller-popup">
+            <div class="CMS-scroll-up">
+                <a href="javascript:void(0);"><span>&nbsp;</span></a>
+            </div>
+            <div class="CMS-scroll-dx ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all">
+                <a href="#" class="ui-slider-handle ui-state-default ui-corner-all">
+                    <span class="CMS-scroll-dx-btn">&nbsp;</span>
+                </a>
+            </div>
+            <div class="CMS-scroll-dn"><a href="javascript:void(0);"><span>&nbsp;</span></a></div>
+        </div>
+    </section>
+</div>

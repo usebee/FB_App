@@ -1,0 +1,19 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: cms-sym2
+    database_user: root
+    database_password: 123456
+    mailer_transport: smtp
+    mailer_host: 10.0.1.25
+    mailer_user: testdev@test2test.com
+    mailer_password: testdev
+    locale: en
+    secret: d00245c7bda39aa016baa57370bfebc9b11deda3
+    database_path: null
+
+    per_item_page: 10
+    upload : "/uploads/"
+    upload_accept_file_types : "/(gif|jpg|png|jpeg|svg)$/i"
+

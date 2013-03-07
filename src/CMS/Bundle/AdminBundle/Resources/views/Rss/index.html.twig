@@ -1,0 +1,17 @@
+{% extends 'CMSAdminBundle::admin.html.twig' %}
+{% block body%}
+<h1>Rss list</h1>
+<ul>
+    {% for item in result %}
+        <li>{{ item.get_title }}
+        
+            <h2 class="title"><a href="{{ item.get_permalink }}">{{ item.get_title }}</a></h2>
+           
+            {{ item.get_content|raw }}
+          
+            <p><small>Posted on {{ item.get_date('j F Y | g:i a') }}</small></p>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

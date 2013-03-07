@@ -1,0 +1,13 @@
+<ul class="lang">
+    {% for opt in options%}
+        {% if curLang == opt['key']%}
+        <li class="current">
+            <a href="{{ path('cms_front_lang', {'lang': opt['key']}) }}" title="{{ opt['key']|upper }}">{{ opt['key']|upper }}</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{{ path('cms_front_lang', {'lang': opt['key']}) }}" title="{{ opt['key']|upper }}">{{ opt['key']|upper }}</a>
+        </li>
+        {% endif %}
+     {% endfor %}
+</ul>

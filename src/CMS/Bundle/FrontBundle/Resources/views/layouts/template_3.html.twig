@@ -1,0 +1,140 @@
+{% extends 'CMSFrontBundle::front.html.twig' %}
+{% block main %}
+<div id="container" class="ourwork">
+    <div id="container-outer">
+        {% block background %}
+            {% if media.getName is defined%}
+                <img class="rzbackground" src="{{asset(mediaPath ~ media.getName)}}" alt="" />
+            {% else %}
+                <img class="rzbackground" src="{{ asset('static/front/images/upload/photo-home.jpg') }}" alt="" />
+            {% endif %}
+        {% endblock %}
+        {% block lang%}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block sidebar %}
+        <aside id="sidebar">
+            <nav id="nav-right" class="off">
+                 <div class="top-nav">
+                    <a href="#" title="{{ 'slide open'|trans({}, "CMSFrontBundle") }}" class="lnk-slide">{{ 'slide open'|trans({}, "CMSFrontBundle") }}</a>
+                    <div class="logo-client">
+                        {% if slug[1] is defined %}
+                            {% for childLogo in menuContent.childPage %}
+                                {% set childMedia = childLogo.getPage.getMediaId %}
+                                {% if slug[1] == childLogo.getAlias%}
+                                    {% if childMedia[0] is defined %}
+                                        {% set logoPath = mediaPath ~ childMedia[0].getName %}
+                                    {% else %}
+                                        {% set logoPath = '#' %}
+                                    {% endif %}
+                                    <a class="view-logo" title="{{ childLogo.getName }}" href="#">
+                                        <img width="59" height="31" title="{{ childLogo.getName }}" alt="{{ childLogo.getName }}" class="attachment-x40 wp-post-image" src="{{ asset(logoPath) }}">
+                                    </a>
+                                    <p class="first ow">{{ childLogo.getName }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p class="first">{{ 'nos realisa tions'|trans({}, "CMSFrontBundle") }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <ul class="list-logo">
+                    {% if (menuContent.childPage is not null) %}
+                        {% for childLogo in menuContent.childPage %}
+                            {% set childMedia = childLogo.getPage.getMediaId %}
+                            {% if childMedia[0] is defined %}
+                                {% set logoPath = mediaPath ~ childMedia[0].getName %}
+                            {% else %}
+                                {% set logoPath = '#' %}
+                            {% endif %}
+                            <li>
+                                <a href="{{ url('cms_front_main', { 'slug': slug[0] ~ '/' ~ childLogo.getAlias }) }}" title="{{ childLogo.getName }}">
+                                    <img src="{{ asset(logoPath) }}" alt="{{ childLogo.getName }}" width="44" height="38"/>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </aside>
+        {% endblock %}
+
+        <section id="container-inner">
+
+            {% include 'CMSFrontBundle::header.html.twig' %}
+
+            <section id="main">
+                <div class="block-content block-video">
+                {% if mainPage.getName is not null  %}
+                    <h3 class="title-1">{{mainPage.getName}}</h3>
+                {% endif %}
+                    {% if (menuContent.childPage is not null) and (slug[1] is defined) %}
+                        {% for childTitle in menuContent.childPage %}
+                            {% if slug[1] == childTitle.getAlias%}
+                                <h3 class="title-2">{{childTitle.getName}} </h3>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% if menuContent.childPage[0] is defined %}
+                            <h3 class="title-2">{{ menuContent.childPage[0].getName }} </h3>
+                        {% endif %}
+                    {% endif %}
+                    <div class="clear-navsub">&nbsp;</div>
+                    <div class="video-outer">
+                        {% if (menuContent.childPage is not null) and (slug[1] is defined) %}
+                            {% for childTitle in menuContent.childPage %}
+                                {% if slug[1] == childTitle.getAlias%}
+                                    {% if listFirstPageArticle[0] is defined %}
+                                        {% set childMediaActive = listFirstPageArticle[0].getArticle.getMediaId %}
+                                        {% if childMediaActive is not null%}
+                                            <video width="613" height="345" controls autobuffer="true" autoplay>
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/mp4" />
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/ogg" />
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/webm" />
+                                            </video>
+                                        {% else %}
+                                            <div class="video-none">
+                                                <p class="en">{{ 'Video soon available'|trans({}, "CMSFrontBundle") }}</p>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="video-none">
+                                            <p class="en">{{ 'Video soon available'|trans({}, "CMSFrontBundle") }}</p>
+                                        </div>
+                                    {% endif %}
+
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for childTitle in menuContent.childPage %}
+                                {% if loop.index == loop.first %}
+                                    {% if articles[0] is defined %}
+                                        {% set childMediaActive = articles[0].getArticle.getMediaId %}
+                                        {% if childMediaActive is not null%}
+                                            <video width="613" height="345" controls autobuffer="true" autoplay>
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/mp4" />
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/ogg" />
+                                                <source src="{{ asset(mediaPath ~ childMediaActive[0].getName) }}" type="video/webm" />
+                                            </video>
+                                        {% else %}
+                                            <div class="video-none">
+                                                <p class="en">{{ 'Video soon available'|trans({}, "CMSFrontBundle") }}</p>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="video-none">
+                                            <p class="en">{{ 'Video soon available'|trans({}, "CMSFrontBundle") }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+{% include 'CMSFrontBundle::footer.html.twig' %}
+</div>
+{% endblock %}

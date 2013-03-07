@@ -1,0 +1,11 @@
+cms_admin:
+    dashboard:
+        - { class: CMS\Bundle\AdminBundle\Entity\User,           group: User,     label: User,           acl: true,  action: [admin_user_new, admin_user] }
+        - { class: CMS\Bundle\AdminBundle\Entity\Language,       group: News,     label: Language,       acl: true,  action: [admin_language_new, admin_language] }
+        - { class: CMS\Bundle\AdminBundle\Entity\MediaCategory,  group: News,     label: Media Category, acl: true,  action: [admin_mediacategory_new, admin_mediacategory] }
+        - { class: CMS\Bundle\AdminBundle\Entity\Media,          group: News,     label: Media,          acl: true,  action: [admin_media_new, admin_media] }
+        - { class: CMS\Bundle\AdminBundle\Entity\Page,           group: News,     label: Page,           acl: true,  action: [admin_page_new, admin_page] }
+        - { class: CMS\Bundle\AdminBundle\Entity\Article,        group: News,     label: Article,        acl: true,  action: [admin_article_new, admin_article] }
+        - { class: CMS\Bundle\AdminBundle\Entity\Rss,            group: Modules,  label: RSS,            acl: true,  action: [admin_rss_add, admin_rss_list] }
+    
+    templates: 5

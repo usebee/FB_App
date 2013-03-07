@@ -1,0 +1,37 @@
+admin_article:
+    pattern:  /{page}/{lang}
+    defaults: { _controller: "CMSAdminBundle:Article:index", page : 1, lang : null }
+    requirements:
+        page:  \d+
+        lang:  \d+
+
+admin_article_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CMSAdminBundle:Article:show" }
+
+admin_article_new:
+    pattern:  /new
+    defaults: { _controller: "CMSAdminBundle:Article:new" }
+
+admin_article_create:
+    pattern:  /create
+    defaults: { _controller: "CMSAdminBundle:Article:create" }
+    requirements: { _method: post }
+
+admin_article_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CMSAdminBundle:Article:edit" }
+
+admin_article_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CMSAdminBundle:Article:update" }
+    requirements: { _method: post }
+
+admin_article_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CMSAdminBundle:Article:delete" }
+    requirements: { _method: post|get }
+
+admin_page_check_alias_unique:
+    pattern:  /check-alias/{alias}
+    defaults: { _controller: "CMSAdminBundle:Page:checkAlias" }

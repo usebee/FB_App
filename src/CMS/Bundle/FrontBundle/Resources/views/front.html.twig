@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{% block title %}Duke | Home{% endblock%}</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="author" content="" />
+	<link rel="shortcut icon" href="{{ asset('static/front/images/favicon.ico') }}" type="image/x-icon" />
+        {% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('static/front/css/screen.css') }}" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('static/front/css/print.css') }}" media="print" />
+        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+        {% endblock %}
+	<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="{{ asset('css/iefix.css') }}" /><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="{{ asset('js/html5.js') }}"></script><![endif]-->
+</head>
+<body>
+    {% block main %}
+    <div id="container" class="home">
+    	<div class="loading-icon">
+       		<img src="{{ asset('static/front/images/loading.gif') }}" alt="loading"/>
+        </div>
+        {% block background %}
+        {% endblock %}
+        <div id="container-outer">
+            {% block blockNews%}
+            <section class="block-news">
+            	<a href="{{ url('cms_front_ourwork') }}" title="showreel duke" class="ui-icon init-icon-9 lnk-show"><span>showreel duke</span></a>
+            </section>
+            {% endblock %}
+
+            {% block lang %}
+                {% render 'CMSFrontBundle:Default:getlanguage' %}
+            {% endblock %}
+            {% block sidebar %}
+            <aside id="sidebar">
+            	<div class="intro-text fck">{{'Home Intro' | trans({}, 'CMSFrontBundle') | raw }}</div>
+            </aside>
+            {% endblock %}
+
+            <section id="container-inner">
+                {% include 'CMSFrontBundle::header.html.twig' %}
+                {% block homeContent %}{% endblock %}
+            </section>
+
+        </div>
+
+        {% include 'CMSFrontBundle::footer.html.twig' %}
+
+    </div>
+    {% endblock %}
+
+    {% block js%}
+    <script type="text/javascript" src="{{ asset('static/front/js/lib.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/front/js/l10n.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/front/js/util.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/front/js/start.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

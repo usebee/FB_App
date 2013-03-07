@@ -1,0 +1,68 @@
+{% extends 'CMSFrontBundle::front.html.twig' %}
+{% block main %}
+<div id="container" class="who-we-are">
+{% block background %}
+    {% if listHomePage is not null %}
+        {% for homePage in listHomePage%}
+            {% if loop.first %}
+                {% set mediaHome = homePage.getPage.getMediaId %}
+                {% if mediaHome[0] is defined %}
+                    <img class="rzbackground" src="{{asset(mediaPath~mediaHome[0].getName)}}" alt="" />
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if media.getName is defined%}
+            <img class="rzbackground" src="{{asset(mediaPath~media.getName)}}" alt="" />
+        {% endif %}
+    {% endif %}
+{% endblock %}
+    <div id="container-outer">
+        {% block blockNews%}
+            <section class="block-news">
+                {% if pageIsShowreel is not null %}
+                    <a href="{{ url('cms_front_main', {'slug': pageIsShowreel.alias }) }}" title="{{ 'showreel duke'|trans({}, "CMSFrontBundle") }}" class="ui-icon init-icon-9 lnk-show"><span>{{ 'showreel duke'|trans({}, "CMSFrontBundle") }}</span></a>
+                {% else %}
+                    <a href="#" title="{{ 'showreel duke'|trans({}, "CMSFrontBundle") }}" class="ui-icon init-icon-9 lnk-show"><span>{{ 'showreel duke'|trans({}, "CMSFrontBundle") }}</span></a>
+                {% endif %}
+            </section>
+        {% endblock %}
+        {% block lang%}
+            {{ parent() }}
+        {% endblock %}
+        {% block sidebar %}
+            {{ parent() }}
+        {% endblock %}
+        <section id="container-inner">
+            {% include 'CMSFrontBundle::header.html.twig' %}
+            {% block homeContent %}
+                {% if listHomePage is not null %}
+                    <div id="blockcontent-news" class="content-type-1">
+                        {% for homePage in listHomePage%}
+                            {% if loop.first %}
+                            <div class="content-type-inner-1">
+                                <h3>{{ homePage.getName | raw }}</h3>
+                                {{ homePage.getDescription | raw }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        <ul class="list-number">
+                        {% for key, homePage in listHomePage%}
+                            {% set classActive = '' %}
+                            {% if loop.first %}
+                                {% set classActive = ' class="active"' %}
+                            {% endif %}
+                            <li{{ classActive | raw }} data-title="{{ homePage.getName | raw }}" data-content="{{ homePage.getDescription | raw }}"><a href="#" title="0{{key+1}}">0{{key+1}}</a></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </section>
+    </div>
+    <script type="text/javascript">
+        var listImg = {{ arrHomeImg | raw }}
+    </script>
+{% include 'CMSFrontBundle::footer.html.twig' %}
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends '::front.html.twig' %}
+{% block main %}
+<div id="container" class="contact">
+    <img class="rzbackground" src="{{ asset('static/front/images/upload/photo-contact.jpg') }}" alt="" />
+    <div id="container-outer">
+
+        {% block lang%}
+        <ul class="lang">
+            <li class="current"><a href="#" title="FR">FR</a></li>
+            <li><a href="#" title="EN">EN</a></li>
+        </ul>
+        {% endblock %}
+
+        {% block sidebar %}
+        <aside id="sidebar"></aside>
+        {% endblock %}
+
+        <section id="container-inner">
+
+            {% include 'CMSFrontBundle::header.html.twig' %}
+
+            <section id="main">
+                <div class="block-content block-content-contact">
+                    <h3>CONTACT</h3>
+                    <ul class="type-content-1">
+                            <li class="active">
+                                <a href="{{ url('cms_front_contact') }}" title="{{ 'notre vision'|trans({}, "CMSFrontBundle") }}">services</a>
+                            </li>
+                            <li class="late">
+                                    <a href="{{ url('cms_front_contact_paris') }}" title="{{ 'diaporama'|trans({}, "CMSFrontBundle") }}">PARIS</a>
+                           </li>
+                     </ul>
+                     <div class="block-outer block-outer-contact">
+                            <div class="scroll-block-outer">
+                            <div class="scroll-block-inner">
+                                <ul>
+                                    <li>
+                                        <h2><a class="ui-icon-link init-icon-link-4" href="#" title="{{ 'ressources humaines Emma Hipeau'|trans({}, "CMSFrontBundle") }}">{{ 'ressources humaines'|trans({}, "CMSFrontBundle") }}  <span> {{ 'Emma Hipeau'|trans({}, "CMSFrontBundle") }}</span> </a></h2>
+                                    </li>
+                                    <li>
+                                        <h2><a class="ui-icon-link init-icon-link-4" href="#" title="{{ 'Developpement'|trans({}, "CMSFrontBundle") }}">{{ 'Developpement'|trans({}, "CMSFrontBundle") }}</a></h2>
+                                    </li>
+                                     <li>
+                                        <h2><a class="ui-icon-link init-icon-link-4" href="#" title="{{ 'services'|trans({}, "CMSFrontBundle") }}">{{ 'services'|trans({}, "CMSFrontBundle") }}</a></h2>
+                                    </li>
+                                 </ul>
+                             </div>
+                        </div>
+                        <div class="CMS-scroller">
+                            <div class="CMS-scroll-up">
+                                    <a href="javascript:void(0);"><span>&nbsp;</span></a>
+                            </div>
+                            <div class="CMS-scroll-dx ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all">
+                                <a href="#" class="ui-slider-handle ui-state-default ui-corner-all">
+                                    <span class="CMS-scroll-dx-btn">&nbsp;</span>
+                                </a>
+                            </div>
+                            <div class="CMS-scroll-dn"><a href="javascript:void(0);"><span>&nbsp;</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    {% include 'CMSFrontBundle::footer.html.twig' %}
+</div>
+{% endblock %}

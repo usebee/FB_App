@@ -1,0 +1,29 @@
+cms_front:
+    pattern:  /
+    defaults: { _controller: CMSFrontBundle:Default:index }
+
+cms_front_popup:
+    pattern: /call-popup/{slug}/{lang}/{bookmark}
+    defaults: { _controller: CMSFrontBundle:Default:popup, bookmark: null, slug: null, lang: null }
+
+cms_front_slideshow:
+    pattern:  /slide/{slug}/{langId}
+    defaults: { _controller: CMSFrontBundle:Default:slide, slug: null, langId: null }
+
+cms_front_contact_popup:
+    pattern: /contact-popup
+    defaults: { _controller: CMSFrontBundle:Contact:contactPopup }
+
+cms_front_child_menu:
+    pattern:  /get-child-menu/{category}/{slug}
+    defaults: { _controller: CMSFrontBundle:Menu:childMenu }
+
+cms_front_lang:
+    pattern:  /switch-lang/{lang}
+    defaults: { _controller: CMSFrontBundle:Default:changeLanguage }
+
+cms_front_main:
+    pattern:  /{slug}
+    defaults: { _controller: CMSFrontBundle:Default:index }
+    requirements:
+        slug: "^((?!admin).+)*$"

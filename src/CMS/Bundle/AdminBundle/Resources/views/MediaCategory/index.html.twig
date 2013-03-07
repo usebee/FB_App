@@ -1,0 +1,55 @@
+{% extends 'CMSAdminBundle::admin.html.twig' %}
+{% block body%}
+<h1>Media Category list</h1>
+
+<div class="btn-group nav">
+    <a href="{{ path('admin_mediacategory_new') }}" class="btn btn-primary"> Create a new entry </a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Created_at</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('admin_mediacategory_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
+            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <a href="{{ path('admin_mediacategory_show', { 'id': entity.id }) }}">show</a>
+                &nbsp; | &nbsp;
+                <a href="{{ path('admin_mediacategory_edit', { 'id': entity.id }) }}">edit</a>
+                &nbsp; | &nbsp;
+                <a class="delete" rel="{{ path('admin_mediacategory_delete', { 'id': entity.id }) }}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{# Pagination for list #}
+{% if lastPage > 1 %}
+<div class="pagination" style="text-align: right;">
+    <ul>
+        <li><a href="{{ path('admin_mediacategory', { 'page': 1 }) }}">«</a></li>
+        <li><a href="{{ path('admin_mediacategory', { 'page': previousPage }) }}">Previous</a></li>
+    {% for page in 1..lastPage %}
+      {% if page == currentPage %}
+        <li class="active"><a href="{{ path('admin_mediacategory', {'page': page }) }}">{{ page }}</a></li>
+      {% else %}
+        <li><a href="{{ path('admin_mediacategory', {'page': page }) }}">{{ page }}</a></li>
+      {% endif %}
+    {% endfor %}
+        <li><a href="{{ path('admin_mediacategory', {'page': nextPage }) }}">Next</a></li>
+        <li><a href="{{ path('admin_mediacategory', {'page': lastPage }) }}">»</a></li>
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}

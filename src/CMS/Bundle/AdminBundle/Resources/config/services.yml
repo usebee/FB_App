@@ -1,0 +1,22 @@
+parameters:
+#    cms_admin.example.class: CMS\Bundle\AdminBundle\Example
+
+services:
+    cms.admin.pool:
+        class: CMS\Bundle\AdminBundle\Admin\Pool
+        arguments:
+            - "@service_container"
+            - ~
+            - ~
+    cms_admin.tree.listener:
+        class: CMS\Bundle\AdminBundle\EventListener\TreeListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postRemove }
+
+    cms.twig.media_extension:
+        class: CMS\Bundle\AdminBundle\Twig\CMSTwigMediaExtension
+        tags:
+            - { name: twig.extension }

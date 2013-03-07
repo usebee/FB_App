@@ -1,0 +1,69 @@
+<div class="form-contact" id="container">    
+    <div class="close-popup">
+        <a title="close popup" href="#">
+            <img alt="close" src="{{ asset('static/front/images/transparent.png') }}" class="ui-icon init-icon-10">
+        </a>
+    </div>   
+    <section id="container-inner">
+        <header>
+            <h1>{{ 'CONTACT' | trans({} , 'CMSFrontBundle') }}</h1>
+            <h2>{{ 'Thank you for completing this form' | trans({} , 'CMSFrontBundle') }}</h2>
+        </header>
+        <article>
+            <form action="{{ path('cms_front_contact_popup') }}" name="form-contact-1" id="form-contact-1" method="POST">
+                <fieldset class="fieldset-1">
+                    <ul>
+                        <li>
+                            <label for="quality">{{ 'Gender' | trans({} , 'CMSFrontBundle') }}*</label>
+                            <select id="quality" class="custSelect" name="quality">
+                                <option>{{ 'Mr' | trans({} , 'CMSFrontBundle') }}</option>
+                                <option>{{ 'Mrs' | trans({} , 'CMSFrontBundle') }}</option>
+                                <option>{{ 'Miss' | trans({} , 'CMSFrontBundle') }}</option>
+                            </select>                            
+                        </li>
+                         <li>
+                            <label for="name">{{ 'Name' | trans({} , 'CMSFrontBundle') }}*</label>
+                            <input type="text" id="name" name="name" required="required">
+                        </li>
+                        <li>
+                            <label for="first name">{{ 'First Name' | trans({} , 'CMSFrontBundle') }}*</label>
+                            <input type="text" id="first_name" name="first_name" required="required">
+                        </li>
+                        <li>
+                            <label for="E-mail">{{ 'Email' | trans({} , 'CMSFrontBundle') }}*</label>
+                            <input type="email" id="e_mail" name="e_mail" required="required">
+                        </li>
+                      </ul>
+                </fieldset><!-- fieldset-1-->
+                <fieldset class="fieldset-2">
+                    <ul>
+                        <li>
+                            <label for="company">{{ 'Company' | trans({} , 'CMSFrontBundle') }}</label>
+                            <input type="text" id="company" name="company">
+                        </li>
+                        <li>
+                            <label for="Téléphone">{{ 'Phone' | trans({} , 'CMSFrontBundle') }}</label>
+                            <input type="text" id="phone" name="telephone">
+                        </li>
+                    </ul>
+                </fieldset>
+                <fieldset class="fieldset-3">
+                    <label for="comment">{{ 'YOUR MESSAGE' | trans({} , 'CMSFrontBundle') }}</label>
+                    <textarea name="comment" id="comment" required="required"></textarea>
+                    <p>*{{ 'Required fields' | trans({} , 'CMSFrontBundle') }}</p>
+                </fieldset>
+                <input type="hidden" value="contact" name="require">
+                <input type="hidden" value="{{ lang }}" id="lang" name="lang">
+                <input type="submit" value="{{ 'SEND' | trans({} , 'CMSFrontBundle') }}" id="btn-submit">                
+            </form>
+            <div class="popup-type-1">
+                <div class="content-popup">
+                        <h1>{{ 'YOUR MESSAGE' | trans({} , 'CMSFrontBundle') }}</h1>
+                        <h2>{{ 'HAS BEEN' | trans({} , 'CMSFrontBundle') }}</h2>
+                        <h3>{{ 'SEND' | trans({} , 'CMSFrontBundle') }}</h3>
+                </div>
+                <a title="close popup" href="#" class="close-popup"><img alt="close" src="{{ asset('static/front/images/transparent.png') }}" class="ui-icon init-icon-10"></a>
+            </div>
+        </article>
+    </section>
+</div>

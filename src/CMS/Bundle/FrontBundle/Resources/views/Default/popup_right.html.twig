@@ -1,0 +1,7 @@
+<ul id="career-right">
+    {% for page in pages %}
+        <li>
+            <a class="ui-icon-link init-icon-link-2" href= "{{ url('cms_front_popup', {'slug' : page.getAlias, 'lang' : langId}) }}" title="{{ page.getTitle }}">{{ page.getTitle }}</a>
+        </li>
+    {% endfor %}
+</ul>

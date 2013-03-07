@@ -1,0 +1,15 @@
+cms_admin_login:
+    pattern:  /login
+    defaults: { _controller: CMSAdminBundle:Security:login }
+
+cms_admin_login_check:
+    pattern:  /login_check
+    defaults: { _controller: CMSAdminBundle:Security:check }
+
+cms_admin_logout:
+    pattern:  /logout
+    defaults: { _controller: CMSAdminBundle:Security:logout }
+
+cms_admin_home:
+    pattern:  /admin
+    defaults: { _controller: CMSAdminBundle:Default:index }

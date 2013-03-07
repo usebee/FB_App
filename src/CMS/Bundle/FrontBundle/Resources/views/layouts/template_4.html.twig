@@ -1,0 +1,93 @@
+{% extends 'CMSFrontBundle::front.html.twig' %}
+{% block main %}
+<div id="container" class="who-we-are">
+    {% if media.getName is defined%}
+        <img class="rzbackground" src="{{asset(mediaPath~media.getName)}}" alt="" />
+    {% endif %}
+        <div id="container-outer">
+        {% block background %}
+            {% if media.getName is defined%}
+                <img class="rzbackground" src="{{asset(mediaPath ~ media.getName)}}" alt="" />
+            {% else %}
+                <img class="rzbackground" src="{{ asset('static/front/images/upload/photo-home.jpg') }}" alt="" />
+            {% endif %}
+        {% endblock %}
+        {% block lang%}
+            {{ parent() }}
+        {% endblock %}
+        {% block sidebar %}
+            <aside id="sidebar"></aside>
+        {% endblock %}
+            <section id="container-inner">
+            {% include 'CMSFrontBundle::header.html.twig' %}
+                <section id="main">
+                    <div class="block-content block-content-1">
+                        {% if mainPage.getName is not null  %}
+                        <h3>{{mainPage.getName}}</h3>
+                        {% endif %}
+                        <ul class="type-content-1">
+                            {% if childMenu is not null %}
+                                {{ childMenu.getContent | raw }}
+                            {% endif %}
+                        </ul>
+                        <div class="block-outer block-outer-2 block-outer-2a">
+                            <div class="scroll-block-outer">
+                                <div class="scroll-block-inner">
+                                    {% if (listPageLevelTwo is not null) and (listPageLevelTwo|length == 1) %}
+                                        <div class="block-inner block-inner-2 block-inner-1a">
+                                            {% set pageTwo = listPageLevelTwo[0] %}
+                                            <header>
+                                                <h2>{{ pageTwo.getName }}</h2>
+                                            </header>
+                                            <article>
+                                                {{ pageTwo.getDescription | raw }}
+                                            </article>
+                                        </div>
+                                    {% else %}
+                                        <div class="block-inner block-inner-2">
+                                            <ul id="career-left">
+                                                {% for listPage in listPageLevelTwo %}
+                                                    <li>
+                                                        <h2>
+                                                            <a title="{{ listPage.getName }}" href="#" data-url="{{ url('cms_front_popup', {'slug' : listPage.getAlias, 'lang' : langId, 'bookmark' : 'listPage'}) }}" class="ui-icon-link init-icon-link-1">
+                                                                {{ listPage.getName }}
+                                                            </a>
+                                                        </h2>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif%}
+                                    <div class="block-siderbar">
+                                        {% if listArticleThree is not null %}
+                                        <ul id="career-right">
+                                            {% for article in listArticleThree %}
+                                                <li>
+                                                    <a class="ui-icon-link init-icon-link-2" href="{{ url('cms_front_popup', {'slug' : article.getAlias, 'lang' : langId}) }}" title="{{ article.getTitle }}" >{{ article.getTitle }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="CMS-scroller">
+                                <div class="CMS-scroll-up">
+                                    <a href="javascript:void(0);"><span>&nbsp;</span></a>
+                                </div>
+                                <div class="CMS-scroll-dx ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all">
+                                    <a href="#" class="ui-slider-handle ui-state-default ui-corner-all">
+                                        <span class="CMS-scroll-dx-btn">&nbsp;</span>
+                                    </a>
+                                </div>
+                                <div class="CMS-scroll-dn"><a href="javascript:void(0);"><span>&nbsp;</span></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+        </div>
+     {% include 'CMSFrontBundle::footer.html.twig' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+cms_web:
+    resource: "@CMSWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cms_acl:
+    resource: "@CMSAclBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cms_admin:
+    resource: "@CMSAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#cms_front:
+#    resource: "@CMSFrontBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+cms_admin_user:
+    resource: "@CMSAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /admin/user
+
+cms_admin_role:
+    resource: "@CMSAdminBundle/Resources/config/routing/role.yml"
+    prefix:   /admin/role
+
+cms_admin_group:
+    resource: "@CMSAdminBundle/Resources/config/routing/group.yml"
+    prefix:   /admin/group
+
+# Internal routing configuration to handle ESI
+# ****** WARNING ******
+# This route should be enabled with caution as it can open a security vulnerability
+# see http://symfony.com/blog/security-release-symfony-2-0-20-and-2-1-5-released for more information
+# ****** WARNING ******
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal
+
+cms_admin_language:
+    resource: "@CMSAdminBundle/Resources/config/routing/language.yml"
+    prefix:   /admin/language
+
+cms_admin_mediacategory:
+        resource: "@CMSAdminBundle/Resources/config/routing/mediacategory.yml"
+        prefix:   /admin/mediacategory
+
+cms_admin_media:
+        resource: "@CMSAdminBundle/Resources/config/routing/media.yml"
+        prefix:   /admin/media
+
+cms_admin_page:
+        resource: "@CMSAdminBundle/Resources/config/routing/page.yml"
+        prefix:   /admin/page
+
+cms_admin_article:
+        resource: "@CMSAdminBundle/Resources/config/routing/article.yml"
+        prefix:   /admin/article
+
+cms_admin_menu:
+        resource: "@CMSAdminBundle/Resources/config/routing/menu.yml"
+        prefix:   /admin/menu
+        
+cms_admin_rss:
+        resource: "@CMSAdminBundle/Resources/config/routing/rss.yml"
+        prefix:   /admin/rss

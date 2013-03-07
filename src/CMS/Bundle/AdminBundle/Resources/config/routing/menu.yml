@@ -1,0 +1,32 @@
+admin_menu:
+    pattern:  /{page}
+    defaults: { _controller: "CMSAdminBundle:Menu:index", page:1 }
+    requirements:
+        page:  \d+
+
+admin_menu_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CMSAdminBundle:Menu:show" }
+
+admin_menu_new:
+    pattern:  /new
+    defaults: { _controller: "CMSAdminBundle:Menu:new" }
+
+admin_menu_create:
+    pattern:  /create
+    defaults: { _controller: "CMSAdminBundle:Menu:create" }
+    requirements: { _method: post }
+
+admin_menu_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CMSAdminBundle:Menu:edit" }
+
+admin_menu_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CMSAdminBundle:Menu:update" }
+    requirements: { _method: post }
+
+admin_menu_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CMSAdminBundle:Menu:delete" }
+    requirements: { _method: post|get }

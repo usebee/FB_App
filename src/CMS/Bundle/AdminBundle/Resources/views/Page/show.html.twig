@@ -1,0 +1,87 @@
+{% extends 'CMSAdminBundle::admin.html.twig' %}
+{% block body %}
+<h1>Page</h1>
+<hr />
+<table>
+    <tr>
+        <td>Parent</td>
+        <td>
+            {% if entity.parent.id is defined %}
+                {{ entity.parent.id }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Background</td>
+        <td>
+            {% if entity.mediaId[0].name is defined %}
+                <image src="/uploads/{{ entity.mediaId[0].name }}" width="100px" height="100px"/>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Active</td>
+        <td>
+            {% if entity.active == 1 %}
+                <input type="checkbox" name="active" checked="checked" disabled="true"/>
+            {% else %}
+                <input type="checkbox" name="active" disabled="true"/>
+            {% endif%}
+        </td>
+    </tr>
+</table>
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+        {% set isActive = 1 %}
+        {% for lang in langList %}
+            {% if isActive == 1%}
+                <li class="active"><a href="#tab{{ lang.id }}" data-toggle="tab">{{ lang.name }}</a></li>
+            {% else %}
+                <li><a href="#tab{{ lang.id }}" data-toggle="tab">{{ lang.name }}</a></li>
+            {% endif %}
+            {% set isActive = 2 %}
+        {% endfor %}
+  </ul>
+    <div class="tab-content">
+        {% set isActive = 1 %}
+        {% for lang in langList %}
+            {% if isActive == 1%}
+                <div class="tab-pane active" id="tab{{ lang.id }}">
+            {% else %}
+                <div class="tab-pane" id="tab{{ lang.id }}">
+            {% endif %}
+                        <table>
+                            <tr>
+                                <td>Name</td>
+                                <td>
+                                    {% if rstPageLang[lang.id][0] is defined %}
+                                        {{ rstPageLang[lang.id][0].name}}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>
+                                    {% if rstPageLang[lang.id][0] is defined %}
+                                        {{ rstPageLang[lang.id][0].description}}
+                                    {% endif %}
+
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+            {% set isActive = 2 %}
+       {% endfor %}
+    </div>
+</div>
+
+<hr />
+<div class="form-actions">
+    <a href="{{ path('admin_page', {'page' : 1}) }}" class="btn">Back To List</a>
+    &nbsp;
+    <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="btn">edit</a>
+</div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+parameters:
+#    cms_front.example.class: CMS\Bundle\FrontBundle\Example
+
+services:
+    cms_front.menu:
+        class: CMS\Bundle\FrontBundle\Classes\Menu
+        arguments:
+            - "@service_container"
+    locale_listener:
+        class: CMS\Bundle\FrontBundle\Listener\LocaleListener
+        arguments: [%locale%]
+        tags:
+            -  { name: kernel.event_subscriber }

@@ -1,0 +1,32 @@
+admin_media:
+    pattern:  /{page}
+    defaults: { _controller: "CMSAdminBundle:Media:index", page: 1 }
+    requirements:
+        page:  \d+
+
+admin_media_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CMSAdminBundle:Media:show" }
+
+admin_media_new:
+    pattern:  /new
+    defaults: { _controller: "CMSAdminBundle:Media:new" }
+
+admin_media_create:
+    pattern:  /create
+    defaults: { _controller: "CMSAdminBundle:Media:create" }
+    requirements: { _method: post }
+
+admin_media_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CMSAdminBundle:Media:edit" }
+
+admin_media_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CMSAdminBundle:Media:update" }
+    requirements: { _method: post }
+
+admin_media_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CMSAdminBundle:Media:delete" }
+    requirements: { _method: post|get }

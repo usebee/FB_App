@@ -1,0 +1,99 @@
+{% extends 'CMSAdminBundle::admin.html.twig' %}
+{% block body%}
+<h1>Page list</h1>
+<div class="nav">
+    <a href="{{ path('admin_page_new') }}" class="btn btn-primary">Create a new entry</a>
+    <div class="btn-group pull-right">
+        <a href="javascript:void(0)" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+            {% for opt in langList %}
+                {% if lang == opt.id %}
+                {{ opt.name }} <span class="caret"></span>
+                {% endif %}
+            {% endfor %}
+        </a>
+        <ul class="dropdown-menu">
+            {% for opt in langList %}
+                <li><a href="{{ path('admin_page', {'page': 1, 'lang' : opt.id }) }}">{{ opt.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th style="width: 14px;">&nbsp;</th>
+            <th>Background</th>
+            <th style="width: 100px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        {% if entity.parent is not null %}
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td>
+                {% if entity.getCurrentPageLanguage is not null %}
+                {{ entity.getCurrentPageLanguage.getTreeName | truncate(50) }}
+                {% else %}
+                <span class="label label-warning">{{ 'Not set value in this language' | trans({}, 'CMSAdminBundle') }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if entity.parent.children is defined %}
+                {% if entity.parent.children[0].id != entity.id %}
+                    <a href="{{ path('admin_page_up', { 'id': entity.id}) }}">
+                        <i class="icon-arrow-up"></i>
+                    </a>
+                {% endif %}
+                {% if entity.parent.children[entity.parent.children|length-1].id != entity.id %}
+                    <a class="pull-right" href="{{ path('admin_page_down', { 'id': entity.id}) }}">
+                        <i class="icon-arrow-down"></i>
+                    </a>
+                {% endif %}
+                {% endif %}
+            </td>
+            <td>
+                {% if entity.mediaId[0].name is defined %}
+                    <image src="/uploads/{{ entity.mediaId[0].name }}" width="100px" height="100px"/>
+                {% endif %}
+            </td>
+            <td>
+                {#<a href="{{ path('admin_page_show', { 'id': entity.page.id }) }}">show</a>
+                &nbsp; | &nbsp;
+                #}
+                <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}">edit</a>
+
+                {% if entity.getCurrentPageLanguage is not null %}
+                    &nbsp; | &nbsp;
+                    <a class="delete" href="#" rel="{{ path('admin_page_delete', { 'id': entity.getCurrentPageLanguage.id }) }}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+{# Pagination for list #}
+{% if lastPage > 1 %}
+<div class="pagination" style="text-align: right;">
+    <ul>
+        <li><a href="{{ path('admin_page', { 'page': 1, 'lang' : lang }) }}">«</a></li>
+        <li><a href="{{ path('admin_page', { 'page': previousPage, 'lang' : lang }) }}">Previous</a></li>
+    {% for page in 1..lastPage %}
+      {% if page == currentPage %}
+        <li class="active"><a href="{{ path('admin_page', {'page': page, 'lang' : lang }) }}">{{ page }}</a></li>
+      {% else %}
+        <li><a href="{{ path('admin_page', {'page': page, 'lang' : lang } )}}">{{ page }}</a></li>
+      {% endif %}
+    {% endfor %}
+        <li><a href="{{ path('admin_page', {'page': nextPage, 'lang' : lang }) }}">Next</a></li>
+        <li><a href="{{ path('admin_page', {'page': lastPage, 'lang' : lang }) }}">»</a></li>
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}

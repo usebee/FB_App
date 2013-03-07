@@ -1,0 +1,90 @@
+{% extends 'CMSAdminBundle::admin.html.twig' %}
+{% block body%}
+<h1>Article list</h1>
+
+<div class="nav">
+    <a href="{{ path('admin_article_new') }}" class="btn btn-primary">Create a new entry</a>
+    <div class="btn-group pull-right">
+        <a href="javascript:void(0)" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+            {% for opt in langList %}
+                {% if lang == opt.id %}
+                {{ opt.name }} <span class="caret"></span>
+                {% endif %}
+            {% endfor %}
+        </a>
+        <ul class="dropdown-menu">
+            {% for opt in langList %}
+                <li><a href="{{ path('admin_article', {'page': 1, 'lang' : opt.id }) }}">{{ opt.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Page</th>
+            <th>Created at</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td>
+                {% if entity.getCurrentArticleLanguage is not null %}
+                    {{ entity.getCurrentArticleLanguage.title | truncate(50) }}
+                {% else %}
+                    <span class="label label-warning">{{ 'Not set value in this language' | trans({}, 'CMSAdminBundle') }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if entity.getPageLanguage.getId is defined %}
+                    {{ entity.getPageLanguage.getName }}
+                {% endif %}
+            </td>
+            <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                {% if entity.active == 1 %}
+                    <input type="checkbox" checked="checked" class="defaultCheckBox" disabled="true"/>
+                {% else %}
+                    <input type="checkbox" class="defaultCheckBox" disabled="true"/>
+                {% endif%}
+            </td>
+            <td>
+                <a href="{{ path('admin_article_edit', { 'id': entity.id }) }}">edit</a>
+                {% if entity.getCurrentArticleLanguage is not null %}
+                    &nbsp; | &nbsp;
+                    <a href="#" rel="{{ path('admin_article_delete', { 'id': entity.getCurrentArticleLanguage.getId }) }}" class="delete">Delete</a>
+                {% endif %}
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{# Pagination for list #}
+{% if lastPage > 1 %}
+<div class="pagination pull-right">
+    <ul>
+        <li><a href="{{ path('admin_article', { 'page': 1, 'lang' : lang }) }}">«</a></li>
+        <li><a href="{{ path('admin_article', { 'page': previousPage, 'lang' : lang }) }}">Previous</a></li>
+    {% for page in 1..lastPage %}
+      {% if page == currentPage %}
+        <li class="active"><a href="{{ path('admin_article', {'page': page, 'lang' : lang }) }}">{{ page }}</a></li>
+      {% else %}
+        <li><a href="{{ path('admin_article', {'page': page, 'lang' : lang } )}}">{{ page }}</a></li>
+      {% endif %}
+    {% endfor %}
+        <li><a href="{{ path('admin_article', {'page': nextPage, 'lang' : lang }) }}">Next</a></li>
+        <li><a href="{{ path('admin_article', {'page': lastPage, 'lang' : lang }) }}">»</a></li>
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+admin_mediacategory:
+    pattern:  /{page}
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:index", page: 1 }
+    requirements:
+        page:  \d+
+
+admin_mediacategory_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:show" }
+
+admin_mediacategory_new:
+    pattern:  /new
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:new" }
+
+admin_mediacategory_create:
+    pattern:  /create
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:create" }
+    requirements: { _method: post }
+
+admin_mediacategory_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:edit" }
+
+admin_mediacategory_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:update" }
+    requirements: { _method: post }
+
+admin_mediacategory_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CMSAdminBundle:MediaCategory:delete" }
+    requirements: { _method: post|get }

@@ -1,0 +1,14 @@
+<header id="header">
+    <h1><a href="{{ url('cms_front') }}" title="Duke">
+            <img src="{{ asset('static/front/images/logo-02.png') }}" title="Duke"></a></h1>
+    <nav id="nav">
+        <ul>
+            <li class="off">
+                <a href="#" title="Menu"><img src="{{ asset('static/front/images/transparent.png') }}" alt=" " class="ui-icon init-icon-1"/><span>{{ 'Menu'|trans({}, "CMSFrontBundle") }}</span></a>
+                {% if mainMenu is not null %}
+                    {{mainMenu.getContent | raw}}
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</header>
